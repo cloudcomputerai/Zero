@@ -1,7 +1,8 @@
 import { createAuthClient } from 'better-auth/client';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 const authClient = createAuthClient({
-  baseURL: import.meta.env.VITE_PUBLIC_BACKEND_URL,
+  baseURL: BACKEND_URL,
   fetchOptions: {
     credentials: 'include',
   },

@@ -25,8 +25,9 @@ import { ArrowLeft } from 'lucide-react';
 import * as Sentry from '@sentry/react';
 import superjson from 'superjson';
 import './globals.css';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
-const getUrl = () => import.meta.env.VITE_PUBLIC_BACKEND_URL + '/api/trpc';
+const getUrl = () => BACKEND_URL + '/api/trpc';
 
 export const getServerTrpc = (req: Request) =>
   createTRPCClient<AppRouter>({

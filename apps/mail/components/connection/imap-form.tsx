@@ -11,6 +11,7 @@ import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 type Security = 'tls' | 'starttls';
 
@@ -37,7 +38,7 @@ const emptyServer = (host: string, port: number, security: Security): ServerFiel
 });
 
 const oauthStartUrl = (provider: string, email: string) =>
-  `${import.meta.env.VITE_PUBLIC_BACKEND_URL}/api/imap-oauth/${provider}/start?email=${encodeURIComponent(email)}`;
+  `${BACKEND_URL}/api/imap-oauth/${provider}/start?email=${encodeURIComponent(email)}`;
 
 function ServerSection({
   title,

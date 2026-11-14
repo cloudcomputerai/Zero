@@ -8,6 +8,7 @@ import useSearchLabels from '@/hooks/use-labels-search';
 import { useTRPC } from '@/providers/query-provider';
 import { usePartySocket } from 'partysocket/react';
 import { useSetAtom } from 'jotai';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 // 10 seconds is appropriate for real-time notifications
 
@@ -98,7 +99,7 @@ export const NotificationProvider = () => {
     room: activeConnection?.id ? String(activeConnection.id) : 'general',
     prefix: 'agents',
     maxRetries: 3,
-    host: import.meta.env.VITE_PUBLIC_BACKEND_URL!,
+    host: BACKEND_URL!,
     onOpen: catchUp,
     onMessage: async (message: MessageEvent<string>) => {
       try {

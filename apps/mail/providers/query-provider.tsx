@@ -18,6 +18,7 @@ import { CACHE_BURST_KEY } from '@/lib/constants';
 import { signOut } from '@/lib/auth-client';
 import { get, set, del } from 'idb-keyval';
 import superjson from 'superjson';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 /**
  * The persist subscriber calls persistClient on *every* query/mutation cache event (each
@@ -163,7 +164,7 @@ const getQueryClient = (connectionId: string | null) => {
   }
 };
 
-const getUrl = () => import.meta.env.VITE_PUBLIC_BACKEND_URL + '/api/trpc';
+const getUrl = () => BACKEND_URL + '/api/trpc';
 
 export const { TRPCProvider, useTRPC, useTRPCClient } = createTRPCContext<AppRouter>();
 

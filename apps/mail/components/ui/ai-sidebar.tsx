@@ -31,6 +31,7 @@ import { useQueryState } from 'nuqs';
 import { cn } from '@/lib/utils';
 import posthog from 'posthog-js';
 import { toast } from 'sonner';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 // AIChat embeds the tiptap editor; only load it once the sidebar is opened.
 const LazyAIChat = lazy(() =>
@@ -416,7 +417,7 @@ function AISidebarPanel({ className }: AISidebarProps) {
   const agent = useAgent({
     agent: 'ZeroAgent',
     name: activeConnection?.id ? String(activeConnection.id) : 'general',
-    host: `${import.meta.env.VITE_PUBLIC_BACKEND_URL}`,
+    host: `${BACKEND_URL}`,
     onError: (e) => console.log(e),
   });
 

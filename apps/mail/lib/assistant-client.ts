@@ -1,7 +1,8 @@
 import { redirect } from 'react-router';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 export async function assistantRequest<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/api/assistant${path}`, {
+  const response = await fetch(`${BACKEND_URL}/api/assistant${path}`, {
     ...init,
     credentials: 'include',
     headers: { 'Content-Type': 'application/json', ...init?.headers },

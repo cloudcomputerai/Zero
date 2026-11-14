@@ -7,6 +7,8 @@ export type SessionUser = NonNullable<Awaited<ReturnType<Auth['api']['getSession
 export type HonoVariables = {
   auth: Auth;
   authRecoveryURL?: string;
+  /** Set by the Clerk SSO route so the user-create hook allows SSO sign-ups. */
+  ssoSignup?: boolean;
   sessionUser?: SessionUser;
   autumn: Autumn;
 };

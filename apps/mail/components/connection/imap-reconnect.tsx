@@ -12,6 +12,7 @@ import { ImapConnectionForm } from './imap-form';
 import { Skeleton } from '../ui/skeleton';
 import { m } from '@/paraglide/messages';
 import { useState } from 'react';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 /** Reconnect / edit dialog for an IMAP connection (prefilled with its saved settings). */
 export function ImapReconnectDialog({
@@ -45,7 +46,7 @@ export function ImapReconnectDialog({
         ) : data.authMethod === 'xoauth2' && data.oauthProvider ? (
           <a
             className="underline"
-            href={`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/api/imap-oauth/${data.oauthProvider}/start?email=${encodeURIComponent(data.email)}`}
+            href={`${BACKEND_URL}/api/imap-oauth/${data.oauthProvider}/start?email=${encodeURIComponent(data.email)}`}
           >
             {m['pages.settings.connections.imap.signInWith']({
               provider: data.oauthProvider === 'microsoft' ? 'Microsoft' : 'Google',

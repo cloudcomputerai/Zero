@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 export type ConversationSummary = { id: string; title: string; updatedAt: number };
 type ConversationList = { currentId: string; conversations: ConversationSummary[] };
 
 const agentUrl = (connectionId: string) =>
-  `${import.meta.env.VITE_PUBLIC_BACKEND_URL}/agents/zero-agent/${connectionId}`;
+  `${BACKEND_URL}/agents/zero-agent/${connectionId}`;
 
 async function call<T>(connectionId: string, path: string, method = 'GET'): Promise<T> {
   const res = await fetch(`${agentUrl(connectionId)}${path}`, { method, credentials: 'include' });

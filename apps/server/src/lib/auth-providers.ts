@@ -1,3 +1,4 @@
+import { relayRedirectUri } from './auth-relay';
 export interface EnvVarInfo {
   name: string;
   source: string;
@@ -46,6 +47,11 @@ export const authProviders = (env: Record<string, string>): ProviderConfig[] => 
       ],
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+      // Multi-tenant: Google redirects to the shared relay, which forwards to this instance.
+      redirectURI: relayRedirectUri(
+        { relayUrl: env.AUTH_RELAY_URL, slug: env.INSTANCE_SLUG, secret: env.RELAY_SECRET },
+        '/callback/google',
+      ),
     },
     required: true,
   },

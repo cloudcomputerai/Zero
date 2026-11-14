@@ -1,9 +1,10 @@
 import { phoneNumberClient } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 import type { Auth } from '@zero/server/auth';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 const clientOptions = {
-  baseURL: import.meta.env.VITE_PUBLIC_BACKEND_URL,
+  baseURL: BACKEND_URL,
   fetchOptions: {
     credentials: 'include' as const,
   },

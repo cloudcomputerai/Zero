@@ -9,14 +9,15 @@ import { CreateEmail } from '@/components/create/create-email';
 import { authProxy } from '@/lib/auth-proxy';
 import { useLoaderData } from 'react-router';
 import type { Route } from './+types/page';
+import { APP_URL } from '@/lib/runtime-urls';
 
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
   const session = await authProxy.api.getSession({ headers: request.headers });
-  if (!session) return Response.redirect(`${import.meta.env.VITE_PUBLIC_APP_URL}/login`);
+  if (!session) return Response.redirect(`${APP_URL}/login`);
   const url = new URL(request.url);
   if (url.searchParams.get('to')?.startsWith('mailto:')) {
     return Response.redirect(
-      `${import.meta.env.VITE_PUBLIC_APP_URL}/mail/compose/handle-mailto?mailto=${encodeURIComponent(url.searchParams.get('to') ?? '')}`,
+      `${APP_URL}/mail/compose/handle-mailto?mailto=${encodeURIComponent(url.searchParams.get('to') ?? '')}`,
     );
   }
 

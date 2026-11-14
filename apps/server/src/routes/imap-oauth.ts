@@ -21,6 +21,7 @@ import { CredentialCipher } from '../lib/crypto/credentials';
 import { testImapSmtpSettings } from '../lib/driver/imap';
 import type { HonoContext } from '../ctx';
 import { redis } from '../lib/services';
+import { relayRedirectUri, wrapWithRelay } from '../lib/auth-relay';
 import { env } from '../env';
 import { Hono } from 'hono';
 
@@ -53,7 +54,14 @@ const clientFor = (provider: ImapOAuthProvider) => {
   return clientId && clientSecret ? { clientId, clientSecret } : null;
 };
 
+const relayConfig = () => ({
+  relayUrl: env.AUTH_RELAY_URL,
+  slug: env.INSTANCE_SLUG,
+  secret: env.RELAY_SECRET,
+});
+
 const redirectUri = (provider: ImapOAuthProvider) =>
+  (provider === 'google' && relayRedirectUri(relayConfig(), '/imap-oauth/google/callback')) ||
   `${env.VITE_PUBLIC_BACKEND_URL}/api/imap-oauth/${provider}/callback`;
 
 const appRedirect = (params: Record<string, string>) =>
@@ -75,15 +83,14 @@ export const imapOAuthApi = new Hono<HonoContext>()
     const loginHint = c.req.query('email') || undefined;
     const pending: PendingState = { userId: user.id, provider, verifier, loginHint };
     await redis().set(`imap-oauth:${state}`, JSON.stringify(pending), { ex: STATE_TTL_SECONDS });
-    return c.redirect(
-      authorizationUrl(provider, {
-        clientId: client.clientId,
-        redirectUri: redirectUri(provider),
-        state,
-        codeChallenge: await challengeFor(verifier),
-        loginHint,
-      }),
-    );
+    const url = authorizationUrl(provider, {
+      clientId: client.clientId,
+      redirectUri: redirectUri(provider),
+      state,
+      codeChallenge: await challengeFor(verifier),
+      loginHint,
+    });
+    return c.redirect(provider === 'google' ? await wrapWithRelay(relayConfig(), url) : url);
   })
   .get('/:provider/callback', async (c) => {
     const provider = c.req.param('provider');

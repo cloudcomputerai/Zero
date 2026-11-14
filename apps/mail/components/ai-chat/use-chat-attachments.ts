@@ -2,6 +2,7 @@ import { useActiveConnection } from '@/hooks/use-connections';
 import { useCallback, useMemo, useState } from 'react';
 import type { ChatAttachment } from './chat-parts';
 import { toast } from 'sonner';
+import { BACKEND_URL } from '@/lib/runtime-urls';
 
 export type PendingAttachment = {
   localId: string;
@@ -55,7 +56,7 @@ export function useChatAttachments() {
         body.set('file', file);
         try {
           const res = await fetch(
-            `${import.meta.env.VITE_PUBLIC_BACKEND_URL}/api/chat-attachments`,
+            `${BACKEND_URL}/api/chat-attachments`,
             {
               method: 'POST',
               body,

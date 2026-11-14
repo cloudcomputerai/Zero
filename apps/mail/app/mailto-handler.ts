@@ -2,6 +2,7 @@ import { cleanEmailAddresses } from '../lib/email-utils';
 import { trpcClient } from '@/providers/query-provider';
 import type { Route } from './+types/mailto-handler';
 import { authProxy } from '@/lib/auth-proxy';
+import { APP_URL } from '@/lib/runtime-urls';
 
 // Function to parse mailto URLs
 async function parseMailtoUrl(mailtoUrl: string) {
@@ -248,27 +249,27 @@ async function createDraftFromMailto(mailtoData: {
 
 export async function clientLoader({ request }: Route.ClientLoaderArgs) {
   const session = await authProxy.api.getSession({ headers: request.headers });
-  if (!session) return Response.redirect(`${import.meta.env.VITE_PUBLIC_APP_URL}/login`);
+  if (!session) return Response.redirect(`${APP_URL}/login`);
 
   const url = new URL(request.url);
 
   // Get the mailto parameter from the URL
   const mailto = url.searchParams.get('mailto');
 
-  if (!mailto) return Response.redirect(`${import.meta.env.VITE_PUBLIC_APP_URL}/mail/compose`);
+  if (!mailto) return Response.redirect(`${APP_URL}/mail/compose`);
 
   // Parse the mailto URL
   const mailtoData = await parseMailtoUrl(mailto);
 
   // If parsing failed, redirect to empty compose
-  if (!mailtoData) return Response.redirect(`${import.meta.env.VITE_PUBLIC_APP_URL}/mail/compose`);
+  if (!mailtoData) return Response.redirect(`${APP_URL}/mail/compose`);
 
   // Create a draft from the mailto data
   const draftId = await createDraftFromMailto(mailtoData);
 
   // If draft creation failed, redirect to empty compose with the parsed data as a fallback
   if (!draftId) {
-    const fallbackUrl = new URL(`${import.meta.env.VITE_PUBLIC_APP_URL}/mail/compose`);
+    const fallbackUrl = new URL(`${APP_URL}/mail/compose`);
     if (mailtoData.to) fallbackUrl.searchParams.append('to', mailtoData.to);
     if (mailtoData.subject) fallbackUrl.searchParams.append('subject', mailtoData.subject);
     if (mailtoData.body) fallbackUrl.searchParams.append('body', mailtoData.body);
@@ -279,6 +280,6 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
 
   // Redirect to compose with the draft ID
   return Response.redirect(
-    `${import.meta.env.VITE_PUBLIC_APP_URL}/mail/compose?draftId=${draftId}`,
+    `${APP_URL}/mail/compose?draftId=${draftId}`,
   );
 }

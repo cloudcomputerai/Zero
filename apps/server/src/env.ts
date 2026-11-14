@@ -100,6 +100,21 @@ export type ZeroEnv = {
    * only while the user is active, on servers that advertise the IDLE capability.
    */
   IMAP_IDLE_ENABLED?: string;
+  // Multi-tenant EgorMail (all optional; unset keeps single-instance behavior).
+  /** Session cookie name prefix; unique per instance so sibling instances never share cookies. */
+  COOKIE_PREFIX?: string;
+  /** Shared Google OAuth relay origin, e.g. `https://auth.email.egorai.com`. */
+  AUTH_RELAY_URL?: string;
+  /** Per-instance secret shared with the relay to sign OAuth `/start` links. */
+  RELAY_SECRET?: string;
+  /** This instance's tenant slug (`<slug>.email.egorai.com`). */
+  INSTANCE_SLUG?: string;
+  /** Clerk organization that owns this instance; SSO tokens must carry this `org_id`. */
+  INSTANCE_ORG_ID?: string;
+  /** Clerk Frontend API origin (token issuer), e.g. `https://clerk.cloudcomputerai.com`. */
+  CLERK_ISSUER?: string;
+  /** `'sso'`: new users may only be created through Clerk SSO (org members). */
+  SIGNUP_MODE?: string;
   THREADS_BUCKET: R2Bucket;
   thread_queue: Queue;
   VECTORIZE: VectorizeIndex;

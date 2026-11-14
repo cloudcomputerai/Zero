@@ -14,6 +14,8 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { clearMailboxChatData } from './chat-attachments';
 import { getSocialProviders } from './auth-providers';
 import { getAuthRecoveryURL } from './auth-recovery';
+import { wrapWithRelay } from './auth-relay';
+import { clerkSso } from './clerk-sso';
 import { redis, resend, twilio } from './services';
 import { getContext } from 'hono/context-storage';
 import type { CreateEmailOptions } from 'resend';
@@ -95,7 +97,12 @@ const scheduleCampaign = (userInfo: { address: string; name: string }) =>
     );
   });
 
+const MAILBOX_OAUTH_PROVIDERS = new Set(['google', 'microsoft']);
+
 const connectionHandlerHook = async (account: Account) => {
+  // Only OAuth mailbox providers carry mail tokens; other account types (e.g. SSO-created
+  // users who connect IMAP later) must not be rejected here.
+  if (!MAILBOX_OAUTH_PROVIDERS.has(account.providerId)) return;
   if (!account.accessToken || !account.refreshToken) {
     console.error('Missing Access/Refresh Tokens', {
       accountId: account.id,
@@ -172,6 +179,7 @@ export const createAuth = () => {
       }),
       jwt(),
       bearer(),
+      clerkSso(),
       phoneNumber({
         sendOTP: async ({ code, phoneNumber }) => {
           // Built lazily so instances without Twilio still serve every other auth route.
@@ -265,6 +273,19 @@ export const createAuth = () => {
       },
     },
     databaseHooks: {
+      user: {
+        create: {
+          before: async (user) => {
+            // Tenant instances only admit members of the owning Clerk org, via SSO.
+            if (env.SIGNUP_MODE === 'sso' && !getContext<HonoContext>().get('ssoSignup')) {
+              throw new APIError('FORBIDDEN', {
+                message: 'Open EgorMail from your CloudComputerAI dashboard to create an account.',
+              });
+            }
+            return { data: user };
+          },
+        },
+      },
       account: {
         create: {
           after: connectionHandlerHook,
@@ -311,6 +332,18 @@ export const createAuth = () => {
     },
     hooks: {
       after: createAuthMiddleware(async (ctx) => {
+        // Multi-tenant: send Google sign-in / add-mailbox through the shared OAuth relay.
+        if (ctx.path === '/sign-in/social' || ctx.path === '/link-social') {
+          const returned = ctx.context.returned as { url?: string; redirect?: boolean } | undefined;
+          if (returned && typeof returned === 'object' && typeof returned.url === 'string') {
+            const url = await wrapWithRelay(
+              { relayUrl: env.AUTH_RELAY_URL, slug: env.INSTANCE_SLUG, secret: env.RELAY_SECRET },
+              returned.url,
+            );
+            if (url !== returned.url) return ctx.json({ ...returned, url });
+          }
+          return;
+        }
         // all hooks that run on sign-up routes
         if (ctx.path.startsWith('/sign-up')) {
           // only true if this request is from a new user
@@ -364,7 +397,8 @@ const createAuthConfig = () => {
       ipAddress: {
         disableIpTracking: true,
       },
-      cookiePrefix: env.NODE_ENV === 'development' ? 'better-auth-dev' : 'better-auth',
+      cookiePrefix:
+        env.COOKIE_PREFIX || (env.NODE_ENV === 'development' ? 'better-auth-dev' : 'better-auth'),
       crossSubDomainCookies: {
         enabled: true,
         domain: env.COOKIE_DOMAIN,

@@ -1,3 +1,4 @@
+import { APP_URL } from '@/lib/runtime-urls';
 const TITLE = 'EgorMail';
 const DESCRIPTION =
   'EgorMail is an AI-powered inbox that runs on your own private cloud computer. Your mail, your machine, your data.';
@@ -15,7 +16,7 @@ export const siteConfig = {
     description: DESCRIPTION,
     images: [
       {
-        url: `${import.meta.env.VITE_PUBLIC_APP_URL}/og.png`,
+        url: `${APP_URL}/og.png`,
         width: 512,
         height: 512,
         alt: TITLE,
@@ -24,7 +25,7 @@ export const siteConfig = {
   },
   category: 'Email Client',
   alternates: {
-    canonical: import.meta.env.VITE_PUBLIC_APP_URL,
+    canonical: APP_URL,
   },
   keywords: [
     'Mail',
@@ -48,5 +49,5 @@ export const siteConfig = {
     'Email Service',
     'Web Application',
   ],
-  //   metadataBase: new URL(import.meta.env.VITE_PUBLIC_APP_URL!),
+  //   metadataBase: new URL(APP_URL!),
 };
