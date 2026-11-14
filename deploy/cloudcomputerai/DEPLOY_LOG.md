@@ -46,3 +46,7 @@
 - Control-plane snapshot pushed: techfundoffice/cloudcomputerai.com branch `ops/live-snapshot-2026-11-14`.
 - Stripe (live, via Composio): product `prod_Vd0wLZIV3N7d2P` "EgorMail", price `price_1UbkubLWZhaHZBrNIOBzvgPC` $29/month (lookup_key `egormail_monthly`). Not wired to checkout yet (Phase 5).
 - Blocked on owner: Google redirect URIs (no browser automation available), Clerk JWT template (clerk CLI not logged in; server key use denied), license email (skipped by owner).
+- Owner instance switched to the shared relay (AUTH_RELAY_URL, INSTANCE_SLUG=owner, RELAY_SECRET); verified sign-in -> relay /start -> Google accepts redirect_uri https://auth.email.egorai.com/callback/google.
+- Release `egormail-v0.1.0` published by the egormail-release workflow (checksum verified).
+- Control plane: branch `feat/egormail-provisioning` on techfundoffice/cloudcomputerai.com (API provisioning + Stripe gate + dashboard page). Not deployed yet.
+- install.sh accepts POSTGRES_PASSWORD/REDIS_TOKEN from the caller (control plane); server copy at /opt/ccai-email/deploy not updated yet.

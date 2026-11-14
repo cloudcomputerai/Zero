@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Idempotent installer for one Zero instance's data plane on gex44-apps.
 #   sudo ./install.sh <slug> <pg_port> <redis_http_port>
-# Creates /opt/ccai-email/<slug>/ with a generated .env (never overwritten),
+# Creates /opt/ccai-email/<slug>/ with a generated .env (never overwritten; POSTGRES_PASSWORD and
+# REDIS_TOKEN are taken from the environment when the caller provides them, e.g. the
+# CloudComputerAI control plane, which also needs them for Hyperdrive and the Worker),
 # starts Postgres/Valkey/REST proxy, installs a nightly pg_dump with 14-day retention.
 set -euo pipefail
 
@@ -21,8 +23,8 @@ if [[ ! -f $dir/.env ]]; then
 CUSTOMER_SLUG=$slug
 PG_PORT=$pg_port
 REDIS_HTTP_PORT=$redis_port
-POSTGRES_PASSWORD=$(openssl rand -hex 24)
-REDIS_TOKEN=$(openssl rand -hex 32)
+POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-$(openssl rand -hex 24)}
+REDIS_TOKEN=${REDIS_TOKEN:-$(openssl rand -hex 32)}
 EOF
   echo "generated $dir/.env"
 else
