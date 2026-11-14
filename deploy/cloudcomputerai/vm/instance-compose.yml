@@ -1,0 +1,66 @@
+# Per-instance data plane for a cloudcomputerai Zero instance on gex44-apps.
+# Postgres + Valkey + Upstash-compatible REST proxy, bound to 127.0.0.1 only.
+# Cloudflare reaches them through the shared `ccai-email-tunnel` (see tunnel-compose.yml).
+# Rendered per instance by install.sh with: docker compose -p ccai-email-<slug> --env-file .env
+name: ccai-email-${CUSTOMER_SLUG}
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: zero
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: zero
+      PGDATA: /var/lib/postgresql/data/pgdata
+    # Hyperdrive refuses origins without TLS; install.sh generates the self-signed pair.
+    command: ['postgres', '-c', 'ssl=on', '-c', 'ssl_cert_file=/tls/server.crt', '-c', 'ssl_key_file=/tls/server.key']
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./tls:/tls:ro
+    ports:
+      - 127.0.0.1:${PG_PORT}:5432
+    networks: [default, ccai-email-tunnel]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U zero -d zero']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging: &logging
+      driver: json-file
+      options: { max-size: 10m, max-file: '3' }
+
+  valkey:
+    image: valkey/valkey:8.1-alpine
+    restart: unless-stopped
+    command: ['valkey-server', '--appendonly', 'yes', '--rename-command', 'FLUSHALL', '', '--rename-command', 'FLUSHDB', '']
+    volumes:
+      - valkey-data:/data
+    healthcheck:
+      test: ['CMD', 'valkey-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging: *logging
+
+  redis-http:
+    image: hiett/serverless-redis-http:0.0.10
+    restart: unless-stopped
+    environment:
+      SRH_MODE: env
+      SRH_TOKEN: ${REDIS_TOKEN:?set REDIS_TOKEN}
+      SRH_CONNECTION_STRING: redis://valkey:6379
+    depends_on:
+      valkey: { condition: service_healthy }
+    ports:
+      - 127.0.0.1:${REDIS_HTTP_PORT}:80
+    networks: [default, ccai-email-tunnel]
+    logging: *logging
+
+volumes:
+  pg-data:
+  valkey-data:
+
+networks:
+  ccai-email-tunnel:
+    external: true

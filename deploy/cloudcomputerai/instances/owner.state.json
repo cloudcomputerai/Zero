@@ -1,0 +1,20 @@
+{
+  "account_id": "bc8e15f958dc350e00c0e39d80ca6941",
+  "zone_id": "2a288b8e3feab677cd4fdd4d52059584",
+  "hyperdrive_id": "6561de0e5fc843db90fd31d4021a1617",
+  "kv": {
+    "prompts_storage": "134b105625b74b1f94ece0ba7a5d97ed",
+    "gmail_sub_age": "57a3a5ad736740d08f0a57a6562b2281",
+    "snoozed_emails": "8e72b5990a334dc7a150e94533b001d5"
+  },
+  "queues": {
+    "thread": "8090c2a849b84c27ae352f6157496c49",
+    "subscribe": "c900a983e76d4e898427566fc5bdaad7"
+  },
+  "tunnel_id": "696a4a08-14f7-4d9e-9c50-da091479bc5a",
+  "access_app_id": "587ed285-bc13-4b3f-bd25-3372af7d6563",
+  "access_service_token_id": "56ae635a-50c2-42ea-bcc2-774f77dce00d",
+  "pg_host": "ccai-email-owner-pg.cloudcomputerai.com",
+  "redis_host": "ccai-email-owner-redis.cloudcomputerai.com",
+  "app_zone_id": "825e6c0323ed2220ecae59a7472befc5"
+}

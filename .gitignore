@@ -62,3 +62,5 @@ worker-configuration.d.ts
 tsx-0/
 
 tools.json
+# Rendered per instance by deploy/cloudcomputerai/render_wrangler.py
+apps/server/wrangler.owner.json

@@ -42,7 +42,7 @@ const scheduleCampaign = (userInfo: { address: string; name: string }) =>
       Effect.promise(() =>
         resendService.emails
           .send({
-            from: '0.email <onboarding@0.email>',
+            from: 'EgorMail <noreply@egorai.com>',
             to: userInfo.address,
             subject,
             react: react as unknown as CreateEmailOptions['react'],
@@ -53,7 +53,7 @@ const scheduleCampaign = (userInfo: { address: string; name: string }) =>
 
     const emails = [
       {
-        subject: 'Welcome to 0.email',
+        subject: 'Welcome to EgorMail',
         react: WelcomeEmail({ name }),
         scheduledAt: undefined,
       },
@@ -160,7 +160,6 @@ const connectionHandlerHook = async (account: Account) => {
 };
 
 export const createAuth = () => {
-  const twilioClient = twilio();
   const dub = new Dub();
 
   return betterAuth({
@@ -175,8 +174,14 @@ export const createAuth = () => {
       bearer(),
       phoneNumber({
         sendOTP: async ({ code, phoneNumber }) => {
-          await twilioClient.messages
-            .send(phoneNumber, `Your verification code is: ${code}, do not share it with anyone.`)
+          // Built lazily so instances without Twilio still serve every other auth route.
+          await Promise.resolve()
+            .then(() =>
+              twilio().messages.send(
+                phoneNumber,
+                `Your verification code is: ${code}, do not share it with anyone.`,
+              ),
+            )
             .catch((error) => {
               console.error('Failed to send OTP', error);
               throw new APIError('INTERNAL_SERVER_ERROR', {
@@ -193,11 +198,11 @@ export const createAuth = () => {
           const verificationUrl = data.url;
 
           await resend().emails.send({
-            from: '0.email <no-reply@0.email>',
+            from: 'EgorMail <noreply@egorai.com>',
             to: data.user.email,
-            subject: 'Delete your 0.email account',
+            subject: 'Delete your EgorMail account',
             html: `
-            <h2>Delete Your 0.email Account</h2>
+            <h2>Delete Your EgorMail Account</h2>
             <p>Click the link below to delete your account:</p>
             <a href="${verificationUrl}">${verificationUrl}</a>
           `,
@@ -273,7 +278,7 @@ export const createAuth = () => {
       requireEmailVerification: true,
       sendResetPassword: async ({ user, url }) => {
         await resend().emails.send({
-          from: '0.email <onboarding@0.email>',
+          from: 'EgorMail <noreply@egorai.com>',
           to: user.email,
           subject: 'Reset your password',
           html: `
@@ -292,11 +297,11 @@ export const createAuth = () => {
         const verificationUrl = `${env.VITE_PUBLIC_APP_URL}/api/auth/verify-email?token=${token}&callbackURL=/settings/connections`;
 
         await resend().emails.send({
-          from: '0.email <onboarding@0.email>',
+          from: 'EgorMail <noreply@egorai.com>',
           to: user.email,
-          subject: 'Verify your 0.email account',
+          subject: 'Verify your EgorMail account',
           html: `
-            <h2>Verify Your 0.email Account</h2>
+            <h2>Verify Your EgorMail Account</h2>
             <p>Click the link below to verify your email:</p>
             <a href="${verificationUrl}">${verificationUrl}</a>
           `,
@@ -368,10 +373,6 @@ const createAuthConfig = () => {
     secret: env.BETTER_AUTH_SECRET,
     trustedOrigins: [
       env.VITE_PUBLIC_APP_URL,
-      'https://app.0.email',
-      'https://sapi.0.email',
-      'https://staging.0.email',
-      'https://0.email',
       'http://localhost:3000',
     ],
     session: {

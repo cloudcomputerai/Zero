@@ -1,0 +1,22 @@
+# One Cloudflare Tunnel per host, shared by every Zero instance on it.
+# Ingress rules are remote-managed through the Cloudflare API (cf_provision.py),
+# routing <slug>-pg.<tunnel domain> -> ccai-email-<slug>-db-1:5432 and
+# <slug>-redis.<tunnel domain> -> ccai-email-<slug>-redis-http-1:80.
+name: ccai-email-tunnel
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:2026.11.0
+    restart: unless-stopped
+    command: ['tunnel', '--no-autoupdate', 'run']
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?set TUNNEL_TOKEN}
+    networks: [ccai-email-tunnel]
+    logging:
+      driver: json-file
+      options: { max-size: 10m, max-file: '3' }
+
+networks:
+  ccai-email-tunnel:
+    name: ccai-email-tunnel
+    external: true # created by install.sh
