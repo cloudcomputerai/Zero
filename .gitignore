@@ -64,3 +64,8 @@ tsx-0/
 tools.json
 # Rendered per instance by deploy/cloudcomputerai/render_wrangler.py
 apps/server/wrangler.owner.json
+
+# build_release.py scratch files
+apps/server/wrangler.release.json
+apps/server/.migrate-entry.mjs
+dist/

@@ -26,6 +26,18 @@ def load_jsonc(path):
     return json.loads(text)
 
 
+# Non-secret per-instance settings forwarded to the Worker when present in <slug>.env.
+OPTIONAL_VARS = (
+    "AUTH_RELAY_URL",
+    "INSTANCE_SLUG",
+    "INSTANCE_ORG_ID",
+    "CLERK_ISSUER",
+    "COOKIE_PREFIX",
+    "SIGNUP_MODE",
+    "IMAP_ENABLED",
+)
+
+
 def load_env(path):
     out = {}
     for line in pathlib.Path(path).read_text().splitlines():
@@ -102,6 +114,8 @@ def render(inst, state):
             "VITE_PUBLIC_BACKEND_URL": api_url,
             "VITE_PUBLIC_APP_URL": app_url,
             "BETTER_AUTH_URL": api_url,
+            # Optional multi-tenant settings, passed through only when the instance sets them.
+            **{k: inst[k] for k in OPTIONAL_VARS if inst.get(k)},
         },
     }
     # Upstream bindings we did not map would silently go missing; fail loudly.

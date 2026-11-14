@@ -32,7 +32,7 @@ for k, v in cfg["vars"].items():
 b.append({"type": "plain_text", "name": "REDIS_URL", "text": f"https://{state['redis_host']}"})
 for k in ("REDIS_TOKEN", "BETTER_AUTH_SECRET", "JWT_SECRET", "CREDENTIALS_ENCRYPTION_KEYS",
           "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "OPENROUTER_API_KEY", "RESEND_API_KEY",
-          "AUTUMN_SECRET_KEY"):
+          "AUTUMN_SECRET_KEY", "RELAY_SECRET"):
     if secrets.get(k):
         b.append({"type": "secret_text", "name": k, "text": secrets[k]})
 
