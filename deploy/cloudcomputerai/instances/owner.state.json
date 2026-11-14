@@ -16,5 +16,6 @@
   "access_service_token_id": "56ae635a-50c2-42ea-bcc2-774f77dce00d",
   "pg_host": "ccai-email-owner-pg.cloudcomputerai.com",
   "redis_host": "ccai-email-owner-redis.cloudcomputerai.com",
-  "app_zone_id": "825e6c0323ed2220ecae59a7472befc5"
+  "app_zone_id": "825e6c0323ed2220ecae59a7472befc5",
+  "relay_kv_id": "24299f3ce73547cea7bd694b6dd779f1"
 }

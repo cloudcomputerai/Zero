@@ -38,3 +38,8 @@
 - Onboarding images hotlinked from assets.0.email removed.
 - Account deletion no longer blocked by a failing Autumn lookup.
 - License: four files carry Apache-2.0 header + "requires a license from Zero Email Inc." Draft clarification request in `legal/zero-license-request.md` (not sent).
+
+## 2026-11-14 — SaaS plan Phase 0–2
+- Control plane snapshot: live `/opt/cloudcomputerai` (api/, saas/, compose) committed locally in `~/projects/cloudcomputerai.com` worktree branch `ops/live-snapshot-2026-11-14` (commit 7a921f7), excluding env files, data and cloud-init password hashes. Push to techfundoffice/cloudcomputerai.com pending owner approval.
+- Phase 1 (code, inert until env set): runtime URLs in frontend, COOKIE_PREFIX, Google redirect via AUTH_RELAY_URL + signed /start wrap, Clerk SSO `/api/auth/sso/clerk`, SIGNUP_MODE=sso. 381/381 server tests.
+- Phase 2: relay Worker `ccai-email-auth-relay` live at https://auth.email.egorai.com; tenant registry KV `ccai-email-tenants` (24299f3ce73547cea7bd694b6dd779f1) with `owner` registered. Owner RELAY_SECRET in owner.secrets.env. Owner instance NOT switched to the relay yet (needs the two Google redirect URIs first).
