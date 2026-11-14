@@ -43,3 +43,6 @@
 - Control plane snapshot: live `/opt/cloudcomputerai` (api/, saas/, compose) committed locally in `~/projects/cloudcomputerai.com` worktree branch `ops/live-snapshot-2026-11-14` (commit 7a921f7), excluding env files, data and cloud-init password hashes. Push to techfundoffice/cloudcomputerai.com pending owner approval.
 - Phase 1 (code, inert until env set): runtime URLs in frontend, COOKIE_PREFIX, Google redirect via AUTH_RELAY_URL + signed /start wrap, Clerk SSO `/api/auth/sso/clerk`, SIGNUP_MODE=sso. 381/381 server tests.
 - Phase 2: relay Worker `ccai-email-auth-relay` live at https://auth.email.egorai.com; tenant registry KV `ccai-email-tenants` (24299f3ce73547cea7bd694b6dd779f1) with `owner` registered. Owner RELAY_SECRET in owner.secrets.env. Owner instance NOT switched to the relay yet (needs the two Google redirect URIs first).
+- Control-plane snapshot pushed: techfundoffice/cloudcomputerai.com branch `ops/live-snapshot-2026-11-14`.
+- Stripe (live, via Composio): product `prod_Vd0wLZIV3N7d2P` "EgorMail", price `price_1UbkubLWZhaHZBrNIOBzvgPC` $29/month (lookup_key `egormail_monthly`). Not wired to checkout yet (Phase 5).
+- Blocked on owner: Google redirect URIs (no browser automation available), Clerk JWT template (clerk CLI not logged in; server key use denied), license email (skipped by owner).
