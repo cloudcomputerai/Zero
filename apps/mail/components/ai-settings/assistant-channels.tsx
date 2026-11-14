@@ -32,7 +32,7 @@ export function AssistantChannels() {
         <a className="underline" href={`sms:${status.data.line}`}>
           {status.data.line}
         </a>
-        , then follow the Zero login link to connect your account.
+        , then follow the EgorMail login link to connect your account.
       </p>
       {status.data.identities.map((identity) => (
         <div key={identity.id} className="flex items-center justify-between gap-3 text-sm">

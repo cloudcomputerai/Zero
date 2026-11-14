@@ -52,7 +52,7 @@ export default function ReconnectPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#0F0F0F] px-4 py-12 text-white">
       <section className="w-full max-w-[440px] space-y-6 rounded-2xl border border-[#2A2A2A] bg-[#1E1E1E] p-6 sm:p-8">
-        <img src="/white-icon.svg" alt="Zero" width={28} height={28} />
+        <img src="/white-icon.svg" alt="EgorMail" width={28} height={28} />
         <div className="space-y-3">
           <h1 className="text-2xl font-medium">Reconnect your email account</h1>
           <p className="text-sm text-[#B7B7B7]">

@@ -14,7 +14,7 @@ export function VoiceButton() {
   if (status !== 'connected') {
     return (
       <ComposerIconButton
-        title="Talk to Zero"
+        title="Talk to Egor"
         onClick={() =>
           startConversation({ hasOpenEmail: !!threadId, currentThreadId: threadId || null })
         }

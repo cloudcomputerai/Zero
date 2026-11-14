@@ -64,7 +64,7 @@ const recipientLabelOf = (draft: ParsedMessage) => {
 /**
  * A saved draft shown in the thread timeline, under the message it replies to.
  * Clicking it opens the composer on exactly this draft; Discard deletes it (with undo).
- * Drafts written by Zero's automatic drafting are shown as suggestions.
+ * Drafts written by EgorMail's automatic drafting are shown as suggestions.
  */
 export function ThreadDraftCard({
   draft,
@@ -118,7 +118,7 @@ export function ThreadDraftCard({
   const preview = previewOf(draft);
   const edited = draft.receivedOn ? formatDate(draft.receivedOn) : '';
   const canAct = !!draftId;
-  const label = isSuggestion ? 'Suggested by Zero' : 'Draft';
+  const label = isSuggestion ? 'Suggested by Egor' : 'Draft';
 
   const handleOpen = () => {
     if (!draftId) {

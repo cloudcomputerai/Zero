@@ -24,14 +24,14 @@ export default function ConnectAssistant() {
   return (
     <main className="bg-background text-foreground flex min-h-screen items-center justify-center p-6">
       <section className="w-full max-w-md space-y-6 rounded-xl border p-6">
-        <h1 className="text-xl font-semibold">Connect your Zero assistant</h1>
+        <h1 className="text-xl font-semibold">Connect your EgorMail assistant</h1>
         <p>
           Link iMessage identity <strong className="break-all">{link.sender}</strong> to{' '}
           <strong className="break-all">{link.account}</strong>.
         </p>
         <p className="text-muted-foreground text-sm">
           Only continue if you started this connection. The assistant will be able to read your
-          connected mailboxes. Sending and changing mail require your approval in Zero.
+          connected mailboxes. Sending and changing mail require your approval in EgorMail.
         </p>
         {connect.data ? (
           <div role="status" className="space-y-3">
@@ -43,7 +43,7 @@ export default function ConnectAssistant() {
               {connect.data.command}
             </code>
             <p className="text-muted-foreground text-sm">
-              Do not share this command. Zero will confirm the connection in iMessage.
+              Do not share this command. EgorMail will confirm the connection in iMessage.
             </p>
           </div>
         ) : (

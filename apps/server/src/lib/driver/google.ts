@@ -869,8 +869,8 @@ export class GoogleMailManager implements MailManager {
         msg.setSubject(data.subject);
         if (data.inReplyTo) msg.setHeader('In-Reply-To', toMessageIdList(data.inReplyTo));
         if (data.references) msg.setHeader('References', toMessageIdList(data.references));
-        // Marks Zero's automatic drafts. Any later save from the app rewrites the MIME without
-        // it, so the "Suggested by Zero" label disappears once the user edits the draft.
+        // Marks EgorMail's automatic drafts. Any later save from the app rewrites the MIME without
+        // it, so the "Suggested by Egor" label disappears once the user edits the draft.
         if (data.isZeroSuggestion) msg.setHeader(ZERO_SUGGESTION_HEADER, 'true');
         msg.addMessage({
           contentType: 'text/html',

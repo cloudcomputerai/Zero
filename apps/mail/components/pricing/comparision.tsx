@@ -271,7 +271,7 @@ export default function Comparision() {
                   </div>
                 </div>
                 <div className="justify-center text-2xl leading-loose font-semibold text-white">
-                  Zero Pro
+                  EgorMail Pro
                 </div>
               </div>
               <button

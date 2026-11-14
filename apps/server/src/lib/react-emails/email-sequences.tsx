@@ -73,41 +73,27 @@ export const WelcomeEmail = ({ name }: EmailProps) => {
   return (
     <Html>
       <Head />
-      <Preview>Welcome to Mail0 👋 Your inbox just leveled up</Preview>
+      <Preview>Welcome to EgorMail. Your inbox, on your own private cloud computer</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={section}>
-            <Heading style={h1}>Welcome to Mail0 👋</Heading>
+            <Heading style={h1}>Welcome to EgorMail</Heading>
             <Text style={text}>Hey {name ? name : 'there'},</Text>
-            <Text style={text}>I&apos;m Nizzy, founder of Mail0 (aka Zero)</Text>
             <Text style={text}>
-              If you&apos;ve ever screamed into the void trying to find that one email thread from 6
-              months ago, or spent 10 minutes writing &quot;sounds good,&quot; you&apos;re in the
-              right place 😅
+              Your EgorMail inbox is ready. It runs on your own private instance, so your mail is
+              never mixed with anyone else&apos;s.
             </Text>
-            <Text style={text}>Mail0 is built different:</Text>
-            <Text style={listItem}>• AI-native from day one</Text>
-            <Text style={listItem}>• Open-source and self-hostable</Text>
-            <Text style={listItem}>
-              • Summarizes long threads, drafts replies, and lets you search your inbox like a
-              conversation
-            </Text>
-            <Text style={listItem}>• Respects your privacy and your time</Text>
+            <Text style={listItem}>• Ask Egor to summarize long threads and draft replies</Text>
+            <Text style={listItem}>• Search your inbox like a conversation</Text>
+            <Text style={listItem}>• Gmail, Outlook and IMAP accounts in one place</Text>
             <Text style={text}>
-              It&apos;s still early. It&apos;s raw. But it&apos;s real. And it&apos;s yours 💪
-            </Text>
-            <Text style={text}>
-              Mail0 is for people like us: curious, technical, and tired of bloated tools pretending
-              to be minimal 🙃
-            </Text>
-            <Text style={text}>
-              Want to chat about email and get a $20 gift card to anywhere you like?{' '}
-              <Link href="https://cal.com/team/0/chat?overlayCalendar=true" style={link}>
-                Book some time with me here
+              Questions or ideas? Just reply to this email, or visit{' '}
+              <Link href="https://egorai.com/egormail" style={link}>
+                egorai.com/egormail
               </Link>
+              .
             </Text>
-            <Text style={text}>Thanks for being one of the first to join this journey 🚀</Text>
-            <Text style={signature}>Nizzy</Text>
+            <Text style={signature}>The EgorMail team</Text>
           </Section>
         </Container>
       </Body>

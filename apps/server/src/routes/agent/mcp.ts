@@ -31,7 +31,7 @@ export class ZeroMCP extends McpAgent<typeof env, Record<string, unknown>, { use
   server = new McpServer({
     name: 'zero-mcp',
     version: '1.0.0',
-    description: 'Zero MCP',
+    description: 'EgorMail MCP',
   });
 
   activeConnectionId: string | undefined;

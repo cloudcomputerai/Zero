@@ -16,13 +16,13 @@ export function assistantAppPresentation(context: AssistantContext, id: string, 
   } catch {
     return undefined;
   }
-  // Zero hosts a web review page, not a native iMessage extension. A normal
+  // EgorMail hosts a web review page, not a native iMessage extension. A normal
   // app card opens the page in the launcher; `live` is not a webview toggle.
   return {
     type: 'app' as const,
     id,
     url,
-    caption: 'Review Zero action',
+    caption: 'Review EgorMail action',
     subcaption: 'Sign in to review and approve',
   };
 }

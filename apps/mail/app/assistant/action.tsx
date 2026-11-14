@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router';
 
 export const meta = () => [
-  { title: 'Review action · Zero' },
+  { title: 'Review action · EgorMail' },
   { name: 'referrer', content: 'no-referrer' },
   { name: 'robots', content: 'noindex, nofollow' },
 ];

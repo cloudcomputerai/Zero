@@ -149,7 +149,7 @@ function FeaturesPane() {
 }
 
 const DISABLED_FEATURES = [
-  'Zero chat and voice',
+  'Egor chat and voice',
   'AI compose and subject lines',
   'Smart search',
   'Thread summaries and sender research',
@@ -209,8 +209,8 @@ function DisableAiCheckbox() {
           </Label>
           <p className="text-muted-foreground text-[13px] leading-snug">
             {disabled
-              ? 'All AI features are off. Zero won’t send your mail to any AI model.'
-              : 'Turn off every AI feature in Zero. Your AI settings are kept for when you turn it back on.'}
+              ? 'All AI features are off. EgorMail won’t send your mail to any AI model.'
+              : 'Turn off every AI feature in EgorMail. Your AI settings are kept for when you turn it back on.'}
           </p>
         </div>
       </div>
@@ -361,7 +361,7 @@ const LABEL_MODES = [
   {
     value: 'learned',
     title: 'Learned from your inbox',
-    body: 'Zero picks topics from your recent mail and creates matching labels.',
+    body: 'EgorMail picks topics from your recent mail and creates matching labels.',
   },
   {
     value: 'custom',
@@ -486,7 +486,7 @@ function LabelListEditor() {
         <div className="space-y-3">
           <SectionHeader
             title="Labels"
-            description="Describe when each label applies. Zero uses the description to decide."
+            description="Describe when each label applies. EgorMail uses the description to decide."
             action={
               <span className="text-muted-foreground text-xs tabular-nums">
                 {labels.length} / {MAX_AI_LABELS}

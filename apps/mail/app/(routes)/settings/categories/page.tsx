@@ -307,7 +307,7 @@ export default function CategoriesSettingsPage() {
     <div className="mx-auto grid max-w-[900px] gap-6">
       <SettingsCard
         title="Mail Categories"
-        description="Customise how Zero shows the category tabs in your inbox. Drag and drop to reorder."
+        description="Customise how EgorMail shows the category tabs in your inbox. Drag and drop to reorder."
         footer={
           <div className="px-6">
             <Button type="button" disabled={isPending} onClick={handleSave}>

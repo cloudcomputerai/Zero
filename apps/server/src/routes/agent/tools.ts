@@ -60,9 +60,9 @@ export const getEmbeddingVector = async (
 
 // const askZeroMailbox = (connectionId: string) =>
 //   tool({
-//     description: 'Ask Zero a question about the mailbox',
+//     description: 'Ask Egor a question about the mailbox',
 //     parameters: z.object({
-//       question: z.string().describe('The question to ask Zero'),
+//       question: z.string().describe('The question to ask EgorMail'),
 //       topK: z.number().describe('The number of results to return').max(9).min(1).default(3),
 //     }),
 //     execute: async ({ question, topK = 3 }) => {
@@ -93,10 +93,10 @@ export const getEmbeddingVector = async (
 
 // const askZeroThread = (connectionId: string) =>
 //   tool({
-//     description: 'Ask Zero a question about a specific thread',
+//     description: 'Ask Egor a question about a specific thread',
 //     parameters: z.object({
-//       threadId: z.string().describe('The ID of the thread to ask Zero about'),
-//       question: z.string().describe('The question to ask Zero'),
+//       threadId: z.string().describe('The ID of the thread to ask EgorMail about'),
+//       question: z.string().describe('The question to ask EgorMail'),
 //     }),
 //     execute: async ({ threadId, question }) => {
 //       const response = await env.VECTORIZE.getByIds([threadId]);

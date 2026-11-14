@@ -1075,7 +1075,7 @@ describe('one Keiki agent with account-scoped conversation principals', () => {
       return Response.json({
         deployment: {
           externalRef: 'zero-shared-gateway',
-          agent: { id: settings.KEIKI_AGENT_ID, name: 'Zero Shared Gateway' },
+          agent: { id: settings.KEIKI_AGENT_ID, name: 'EgorMail Shared Gateway' },
           channels: [],
         },
       });
@@ -1373,7 +1373,7 @@ describe('one Keiki agent with account-scoped conversation principals', () => {
           type: 'app',
           id: result.id,
           url: `https://zero.test/assistant/action/${result.id}`,
-          caption: 'Review Zero action',
+          caption: 'Review EgorMail action',
           subcaption: 'Sign in to review and approve',
         },
         instructions: expect.stringContaining('presentationDelivery.state = accepted'),

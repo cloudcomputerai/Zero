@@ -43,7 +43,7 @@ export function AiSettingsDialog() {
                 AI settings
               </DialogTitle>
               <DialogDescription className="text-[13px] leading-snug">
-                Choose what Zero does with new mail, which labels it applies, and how it writes.
+                Choose what EgorMail does with new mail, which labels it applies, and how it writes.
               </DialogDescription>
             </div>
             <DialogClose asChild>

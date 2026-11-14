@@ -150,7 +150,7 @@ async function identifyPhotonSender(
     );
     return identityReply(
       linked
-        ? 'Your Zero assistant is connected. Send a new message to get started.'
+        ? 'Your EgorMail assistant is connected. Send a new message to get started.'
         : 'That connection code is invalid or expired. Open a new connection link and try again.',
     );
   }
@@ -171,13 +171,13 @@ async function identifyPhotonSender(
   );
   if (identity?.active && identity.userId) {
     if (!(await isAiEnabledForUser(identity.userId)))
-      return identityReply('AI is disabled in your Zero settings.');
+      return identityReply('AI is disabled in your EgorMail settings.');
     return accountPrincipal(identity.userId);
   }
   if (identity && !identity.userId)
-    return identityReply('This messaging identity is no longer connected to a Zero account.');
+    return identityReply('This messaging identity is no longer connected to a EgorMail account.');
   if (!sender.messageId)
-    return identityReply('Send a new private iMessage to connect your Zero account.');
+    return identityReply('Send a new private iMessage to connect your EgorMail account.');
   // Stable across delivery retries, but a new message can obtain a fresh link
   // immediately after a consumed link or a disconnect.
   const token = await signAssistantToken(
@@ -220,7 +220,7 @@ async function identifyPhotonSender(
     }),
   );
   if (!allowed) return identityReply('Too many connection attempts. Try again in a minute.');
-  return identityReply(`Connect your Zero account to use your assistant: ${linkUrl(token)}`);
+  return identityReply(`Connect your EgorMail account to use your assistant: ${linkUrl(token)}`);
 }
 
 /** Keiki surfaces that tie a decision to a verified person (signed into the webhook body). A chat reply is not one. */
@@ -321,7 +321,7 @@ export const assistantHooks = new Hono<HonoContext>()
         channel: { channel: 'api', conversationId: sender.conversationId },
       });
       if (!userId || !(await isAiEnabledForUser(userId)))
-        return c.json(identityReply('Sign in to Zero with AI enabled to use this conversation.'));
+        return c.json(identityReply('Sign in to EgorMail with AI enabled to use this conversation.'));
       return c.json(accountPrincipal(userId));
     }
     if (sender.channel !== 'photon' || sender.userId !== conversation.id)
@@ -515,7 +515,7 @@ export const assistantHooks = new Hono<HonoContext>()
         url,
         ...(presentation ? { presentation } : {}),
         instructions: awaitingApproval
-          ? 'The action has NOT executed. Only the authenticated account owner can review and approve it in Zero. If Keiki adds presentationDelivery.state = accepted, direct the user to the review card in Messages and include this exact URL as browser fallback. Otherwise show this exact URL as the approval step. A presentation request alone is not delivery. Do not send another card manually or retry the mutation to recover delivery.'
+          ? 'The action has NOT executed. Only the authenticated account owner can review and approve it in EgorMail. If Keiki adds presentationDelivery.state = accepted, direct the user to the review card in Messages and include this exact URL as browser fallback. Otherwise show this exact URL as the approval step. A presentation request alone is not delivery. Do not send another card manually or retry the mutation to recover delivery.'
           : 'This action was already requested. Do not claim it is awaiting approval or request it again. Use get_action_status to check its current status.',
       });
     }
@@ -527,7 +527,7 @@ export const assistantApi = new Hono<HonoContext>()
   .use('*', async (c, next) => {
     c.header('Cache-Control', 'no-store');
     c.header('Referrer-Policy', 'no-referrer');
-    if (!c.var.sessionUser) return c.json({ error: 'Sign in to Zero' }, 401);
+    if (!c.var.sessionUser) return c.json({ error: 'Sign in to EgorMail' }, 401);
     if (c.req.method !== 'GET') {
       const origin = c.req.header('Origin');
       if (origin !== new URL(env.VITE_PUBLIC_APP_URL).origin)

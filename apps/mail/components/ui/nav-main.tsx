@@ -197,9 +197,9 @@ export function NavMain({ items }: NavMainProps) {
             </SidebarMenuButton>
             <NavItem
               key={'feedback'}
-              isActive={isUrlActive('https://feedback.0.email')}
-              href={'https://feedback.0.email'}
-              url={'https://feedback.0.email'}
+              isActive={isUrlActive('https://egorai.com/egormail')}
+              href={'https://egorai.com/egormail'}
+              url={'https://egorai.com/egormail'}
               icon={MessageSquare}
               target={'_blank'}
               title={m['navigation.sidebar.feedback']()}

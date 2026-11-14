@@ -153,7 +153,7 @@ export const ParsedMessageSchema = z.object({
     )
     .optional(),
   isDraft: z.boolean().optional(),
-  /** Draft written by Zero's automatic drafting and not edited since. */
+  /** Draft written by EgorMail's automatic drafting and not edited since. */
   isZeroSuggestion: z.boolean().optional(),
 });
 

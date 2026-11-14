@@ -12,13 +12,13 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-/** Zero's mark, drawn with currentColor so it can spin as the loader. */
+/** EgorMail's mark, drawn with currentColor so it can spin as the loader. */
 export const ZeroMark = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 191 191" fill="none" aria-hidden className={className}>
-    <path
-      d="M38.125 190.625V152.5H0V38.125H38.125V0H152.5V38.125H190.625V152.5H152.5V190.625H38.125ZM38.125 114.375H76.25V150.975H152.5V76.25H114.375V114.375H76.25V76.25H114.375V39.65H38.125V114.375Z"
-      fill="currentColor"
-    />
+  <svg viewBox="0 0 64 64" fill="currentColor" aria-hidden className={className}>
+    <path d="M8 6h6v52H8z" />
+    <path d="M14 6h28l16 0-14 6H14z" />
+    <path d="M14 29h30l14 3-14 3H14z" />
+    <path d="M14 52h30l14 6H14z" />
   </svg>
 );
 
@@ -139,7 +139,7 @@ export const THINKING_LABEL = 'Thinking...';
 export const WRITING_LABEL = 'Writing response...';
 
 /**
- * The loader. While the turn runs it shows a spinning Zero mark and an animated
+ * The loader. While the turn runs it shows a spinning EgorMail mark and an animated
  * label for the current step; afterwards it collapses to "Thought", expandable
  * to the list of steps (tool calls, reasoning) joined by a connector line.
  */

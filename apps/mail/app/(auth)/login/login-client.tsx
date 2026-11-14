@@ -51,14 +51,14 @@ const getProviderIcon = (providerId: string, className?: string): ReactNode => {
         <>
           <img
             src="/white-icon.svg"
-            alt="Zero"
+            alt="EgorMail"
             width={15}
             height={15}
             className="mr-2 hidden dark:block"
           />
           <img
             src="/black-icon.svg"
-            alt="Zero"
+            alt="EgorMail"
             width={15}
             height={15}
             className="mr-2 block dark:hidden"
@@ -149,7 +149,7 @@ function LoginClientContent({ providers, isProd }: LoginClientProps) {
       <header className="relative z-10 flex w-full justify-center px-4 pt-6">
         <nav className="flex w-full max-w-4xl items-center justify-between rounded-xl border-t border-[#2A2A2A] bg-[#1E1E1E] p-3 px-6">
           <Link to="/" className="relative bottom-0.5 flex items-center gap-2">
-            <img src="/white-icon.svg" alt="Zero" width={22} height={22} />
+            <img src="/white-icon.svg" alt="EgorMail" width={22} height={22} />
           </Link>
           <Link
             to="/"

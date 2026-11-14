@@ -1,12 +1,12 @@
 {
-  "name": "Zero",
-  "short_name": "0",
-  "description": "Zero - the first open source email app that puts your privacy and safety first.",
+  "name": "EgorMail",
+  "short_name": "EgorMail",
+  "description": "EgorMail: an AI-powered inbox on your own private cloud computer.",
   "scope": "/",
   "start_url": "/mail/inbox",
   "display": "standalone",
-  "background_color": "#000",
-  "theme_color": "#fff",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "icons": [
     {
       "src": "/icons-pwa/icon-512.png",

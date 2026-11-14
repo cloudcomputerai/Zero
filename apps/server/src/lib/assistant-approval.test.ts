@@ -16,7 +16,7 @@ describe('Keiki app presentation requests', () => {
       type: 'app',
       id,
       url,
-      caption: 'Review Zero action',
+      caption: 'Review EgorMail action',
       subcaption: 'Sign in to review and approve',
     });
     expect(assistantAppPresentation(context(), id, url)).not.toHaveProperty('live');

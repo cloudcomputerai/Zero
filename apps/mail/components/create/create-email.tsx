@@ -91,7 +91,7 @@ export function CreateEmail({
     const fromEmail = data.fromEmail || aliases?.[0]?.email || userEmail;
 
     const zeroSignature = settings?.settings.zeroSignature
-      ? '<p style="color: #666; font-size: 12px;">Sent via <a href="https://0.email/" style="color: #0066cc; text-decoration: none;">Zero</a></p>'
+      ? '<p style="color: #666; font-size: 12px;">Sent via <a href="https://egorai.com/egormail" style="color: #0066cc; text-decoration: none;">EgorMail</a></p>'
       : '';
 
     await sendEmail({

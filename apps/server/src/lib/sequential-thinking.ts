@@ -33,7 +33,7 @@ export class SequentialThinkingProcessor {
   private disableThoughtLogging: boolean;
 
   constructor() {
-    this.disableThoughtLogging = false; // Enable logging by default in Zero
+    this.disableThoughtLogging = false; // Enable logging by default in EgorMail
   }
 
   private validateThoughtData(input: SequentialThinkingParams): ThoughtData {

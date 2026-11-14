@@ -18,7 +18,7 @@ export interface ProviderConfig {
 export const customProviders: ProviderConfig[] = [
   // {
   //   id: "zero",
-  //   name: "Zero",
+  //   name: "EgorMail",
   //   requiredEnvVars: [],
   //   config: {},
   //   isCustom: true,

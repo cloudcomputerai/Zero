@@ -62,7 +62,7 @@ export default function Footer() {
                 className="hidden flex-col items-center justify-start md:flex"
               >
                 <div className="justify-start text-center text-lg leading-7 font-normal text-white lg:text-2xl">
-                  Get started and see how 0.email helps you process your inbox in a fraction of the
+                  Get started and see how EgorMail helps you process your inbox in a fraction of the
                   time.
                 </div>
               </motion.div>
@@ -155,7 +155,7 @@ export default function Footer() {
                   rel="noreferrer"
                 >
                   <div className="justify-start self-stretch text-base leading-none text-white opacity-80 transition-opacity hover:opacity-100">
-                    Chat with Zero
+                    Chat with EgorMail
                   </div>
                 </a>
                 <a
@@ -165,7 +165,7 @@ export default function Footer() {
                   rel="noreferrer"
                 >
                   <div className="justify-start self-stretch text-base leading-none text-white opacity-80 transition-opacity hover:opacity-100">
-                    Zero AI
+                    Egor AI
                   </div>
                 </a>
                 <a
@@ -213,7 +213,7 @@ export default function Footer() {
         <div className="flex flex-col items-start justify-start gap-6 self-stretch">
           <div className="inline-flex items-center justify-between self-stretch">
             <div className="justify-start text-xs leading-tight font-medium text-white opacity-80 sm:text-sm">
-              © 2025 Zero Email Inc, All Rights Reserved
+              © 2026 CloudComputerAI · EgorMail is built on the open-source EgorMail project (MIT)
             </div>
             <div className="flex items-center justify-start gap-4">
               <Link

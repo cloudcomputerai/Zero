@@ -68,7 +68,7 @@ export function AIChat({
     chatMessages.enabled && hasContent && !files.isUploading && !(isLoading && queue.isFull);
 
   const editor = useComposeEditor({
-    placeholder: 'Ask Zero to do anything...',
+    placeholder: 'Ask Egor to do anything...',
     onLengthChange: () => setHasText(editor.getText().trim().length > 0),
     onKeydown(event) {
       if (event.key === '0' && event.metaKey) return toggleOpen();
@@ -153,7 +153,7 @@ export function AIChat({
             className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center px-6"
           >
             <TextShimmer className="text-center text-xl font-medium">
-              Upgrade to Zero Pro for unlimited AI chat
+              Upgrade to EgorMail Pro for unlimited AI chat
             </TextShimmer>
             <Button className="mt-2 h-8 w-52">Start 7 day free trial</Button>
           </div>

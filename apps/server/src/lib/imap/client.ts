@@ -213,7 +213,7 @@ export class ImapClient {
     if (this.has('ID')) {
       await this.run([
         'ID',
-        [{ quoted: 'name' }, { quoted: this.options.clientName ?? 'Zero' }],
+        [{ quoted: 'name' }, { quoted: this.options.clientName ?? 'EgorMail' }],
       ]).catch(() => {});
     }
 

@@ -21,8 +21,8 @@ const openrouter = () => {
     apiKey: env.OPENROUTER_API_KEY,
     compatibility: 'strict',
     headers: {
-      'HTTP-Referer': env.VITE_PUBLIC_APP_URL || 'https://0.email',
-      'X-Title': 'Zero',
+      'HTTP-Referer': env.VITE_PUBLIC_APP_URL || 'https://email.egorai.com',
+      'X-Title': 'EgorMail',
     },
   });
 };

@@ -836,7 +836,7 @@ const app = new Hono<HonoContext>()
       },
     }),
   )
-  .get('/health', (c) => c.json({ message: 'Zero Server is Up!' }))
+  .get('/health', (c) => c.json({ message: 'EgorMail Server is Up!' }))
   .get('/', (c) => c.redirect(`${env.VITE_PUBLIC_APP_URL}`))
   .post('/monitoring/sentry', async (c) => {
     try {

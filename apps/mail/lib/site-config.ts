@@ -1,6 +1,6 @@
-const TITLE = 'Zero';
+const TITLE = 'EgorMail';
 const DESCRIPTION =
-  'Experience email the way you want with 0 - the first open source email app that puts your privacy and safety first.';
+  'EgorMail is an AI-powered inbox that runs on your own private cloud computer. Your mail, your machine, your data.';
 
 export const siteConfig = {
   title: TITLE,
@@ -8,16 +8,16 @@ export const siteConfig = {
   icons: {
     icon: '/favicon.ico',
   },
-  applicationName: 'Zero',
-  creator: '@nizzyabi @bruvimtired @ripgrim @needleXO @dakdevs @mrgsub',
+  applicationName: 'EgorMail',
+  creator: 'CloudComputerAI',
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
     images: [
       {
         url: `${import.meta.env.VITE_PUBLIC_APP_URL}/og.png`,
-        width: 1200,
-        height: 630,
+        width: 512,
+        height: 512,
         alt: TITLE,
       },
     ],
