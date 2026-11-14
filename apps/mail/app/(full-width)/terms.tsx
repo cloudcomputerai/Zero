@@ -218,6 +218,17 @@ const sections = [
     ),
   },
   {
+    title: 'Governing Law',
+    content: (
+      <p>
+        These terms are governed by the laws of the State of Nevada, United States, without regard
+        to its conflict-of-law rules. Any dispute arising from these terms or EgorMail will be
+        brought in the state or federal courts located in Clark County, Nevada, unless the law
+        where you live gives you the right to bring it elsewhere.
+      </p>
+    ),
+  },
+  {
     title: 'Changes to These Terms',
     content: (
       <p>
@@ -231,7 +242,9 @@ const sections = [
     title: 'Contact',
     content: (
       <p>
-        Questions about these terms? Email <a href={`mailto:${CONTACT}`}>{CONTACT}</a>.
+        Questions about these terms? Email <a href={`mailto:${CONTACT}`}>{CONTACT}</a>, or write
+        to us at CloudComputerAI, c/o educationshop.org, 5348 Vegas Blvd #128, Las Vegas, NV 89108, United
+        States.
       </p>
     ),
   },

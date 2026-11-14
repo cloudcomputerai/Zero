@@ -326,7 +326,8 @@ const sections = [
     content: (
       <p>
         Questions about this policy or your data? Email{' '}
-        <a href={`mailto:${CONTACT}`}>{CONTACT}</a>.
+        <a href={`mailto:${CONTACT}`}>{CONTACT}</a>, or write to us at CloudComputerAI, c/o educationshop.org, 5348 Vegas Blvd #128, Las Vegas, NV 89108, United
+        States.
       </p>
     ),
   },
