@@ -73,8 +73,19 @@ export interface ImapConnectionInput {
   >;
 }
 
-const SENTRY_HOST = 'o4509328786915328.ingest.us.sentry.io';
-const SENTRY_PROJECT_IDS = new Set(['4509328795303936']);
+// The Sentry tunnel only forwards to this deployment's own project (VITE_PUBLIC_SENTRY_DSN).
+// Unset means error reporting is off and envelopes are dropped.
+const sentryTarget = (): { host: string; projectId: string } | null => {
+  const raw = (env as unknown as { VITE_PUBLIC_SENTRY_DSN?: string }).VITE_PUBLIC_SENTRY_DSN;
+  if (!raw) return null;
+  try {
+    const dsn = new URL(raw);
+    const projectId = dsn.pathname.replace(/^\//, '');
+    return projectId ? { host: dsn.hostname, projectId } : null;
+  } catch {
+    return null;
+  }
+};
 
 export class DbRpcDO extends RpcTarget {
   constructor(
@@ -844,18 +855,20 @@ const app = new Hono<HonoContext>()
       const envelope = new TextDecoder().decode(envelopeBytes);
       const piece = envelope.split('\n')[0];
       const header = JSON.parse(piece);
+      const target = sentryTarget();
+      if (!target) return c.body(null, 204);
       const dsn = new URL(header['dsn']);
       const project_id = dsn.pathname?.replace('/', '');
 
-      if (dsn.hostname !== SENTRY_HOST) {
+      if (dsn.hostname !== target.host) {
         throw new Error(`Invalid sentry hostname: ${dsn.hostname}`);
       }
 
-      if (!project_id || !SENTRY_PROJECT_IDS.has(project_id)) {
+      if (project_id !== target.projectId) {
         throw new Error(`Invalid sentry project id: ${project_id}`);
       }
 
-      const upstream_sentry_url = `https://${SENTRY_HOST}/api/${project_id}/envelope/`;
+      const upstream_sentry_url = `https://${target.host}/api/${project_id}/envelope/`;
       await fetch(upstream_sentry_url, {
         method: 'POST',
         body: envelopeBytes,

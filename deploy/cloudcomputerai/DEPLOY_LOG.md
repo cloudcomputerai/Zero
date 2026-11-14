@@ -31,3 +31,10 @@
 - Sales page: https://egorai.com/egormail, static file `/var/www/egormail/index.html` on gex44-apps (source: `egormail-site/index.html`), nginx exact-match locations in `/etc/nginx/sites-available/egorai.com.conf` (+ /email, /mail -> /egormail). Backup of prior config in /root/egorai.com.conf.bak-*.
 - Server tests: 370/370 pass.
 - TODO (owner, Google Console): add origin https://email.egorai.com + redirect https://api.email.egorai.com/api/auth/callback/google; rename consent screen to EgorMail. Replace upstream privacy/terms pages with your own.
+
+## 2026-11-14 — Legal pages, privacy fixes, license question
+- New EgorMail Privacy Policy and Terms (`apps/mail/app/(full-width)/privacy.tsx`, `terms.tsx`), written to match this deployment (cached mail on Cloudflare, DB on Hetzner DE, AI providers, Google Limited Use). Contact: support@egorai.com (egorai.com has no MX yet; needs Email Routing).
+- Removed upstream's hard-coded Sentry DSN + session replay (frontend errors/replays were going to Zero Email Inc.'s Sentry). Sentry is now opt-in via VITE_PUBLIC_SENTRY_DSN; server tunnel forwards only to that project, else 204.
+- Onboarding images hotlinked from assets.0.email removed.
+- Account deletion no longer blocked by a failing Autumn lookup.
+- License: four files carry Apache-2.0 header + "requires a license from Zero Email Inc." Draft clarification request in `legal/zero-license-request.md` (not sent).

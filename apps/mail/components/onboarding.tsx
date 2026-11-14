@@ -1,28 +1,24 @@
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ReactNode } from 'react';
 import confetti from 'canvas-confetti';
 
-const steps = [
+const steps: { title: string; description: ReactNode; video?: string }[] = [
   {
     title: 'Welcome to EgorMail!',
     description: 'Your new intelligent email experience starts here.',
-    video: 'https://assets.0.email/get-started.png',
   },
   {
     title: 'Chat with your inbox',
     description: 'EgorMail allows you to chat with your inbox, and take actions on your behalf.',
-    video: 'https://assets.0.email/step2.gif',
   },
   {
     title: 'AI Compose & Reply',
     description: 'Our AI assistant allows you to write emails that sound like you.',
-    video: 'https://assets.0.email/step1.gif',
   },
   {
     title: 'Label your emails',
     description: 'EgorMail helps you label your emails to focus on what matters.',
-    video: 'https://assets.0.email/step3.gif',
   },
   {
     title: 'Coming Soon',
@@ -33,12 +29,10 @@ const steps = [
         </span>
       </>
     ),
-    video: 'https://assets.0.email/coming-soon.png',
   },
   {
     title: 'Ready to start?',
     description: 'Click below to begin your intelligent email experience!',
-    video: 'https://assets.0.email/ready.png',
   },
 ];
 

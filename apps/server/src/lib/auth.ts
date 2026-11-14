@@ -213,9 +213,10 @@ export const createAuth = () => {
           const db = await getZeroDB(user.id);
           const connections = await db.findManyConnections();
           const context = getContext<HonoContext>();
-          const customer = await context.var.autumn.customers.get(user.id);
-          if (customer.data) {
-            try {
+          // Billing is optional (self-hosted instances run without Autumn); never block deletion on it.
+          try {
+            const customer = await context.var.autumn.customers.get(user.id);
+            if (customer.data) {
               await Promise.all(
                 customer.data.products.map(async (product) =>
                   context.var.autumn.cancel({
@@ -224,9 +225,9 @@ export const createAuth = () => {
                   }),
                 ),
               );
-            } catch (error) {
-              console.error('Failed to delete Autumn customer:', error);
             }
+          } catch (error) {
+            console.error('Failed to delete Autumn customer:', error);
           }
 
           const revokedAccounts = (
